@@ -4,20 +4,16 @@ version = "0.1.0"
 authors = ["SeniorMars <cjh16@rice.edu>"]
 edition = "2021"
 
-# [profile.dev]
-# opt-level = 0
-# debug = true
-#
-# [profile.release]
-# debug = 1
-# incremental = true
-# lto = "off"
-
 [lib]
 name = "render"
 crate-type = ["cdylib"]
 
 [dependencies]
-anyhow = "1"
 nvim-oxi = { version = "0.2.2", features = ["test", "neovim-0-8"] }
 serde = { version = '1.0', features = ["derive"] }
+anyhow = "1"
+base64 = "0.13"
+tempfile = "3.1"
+
+[dev-dependencies]
+image = "0.24"

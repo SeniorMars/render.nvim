@@ -10,7 +10,39 @@ use oxi::{
 use serde::{Deserialize, Serialize};
 
 #[derive(Clone, Serialize, Deserialize)]
-pub struct Opts {}
+pub struct Opts {
+    auto_display: Option<bool>,
+    protocol: Option<String>,
+    #[serde(default)]
+    latex: LatexOpts,
+    #[serde(default)]
+    typst: TypstOpts,
+}
+
+#[derive(Clone, Serialize, Deserialize, Default)]
+pub struct PDFRendererOpts {
+    background_color: Option<String>,
+    font_color: Option<String>,
+    font: Option<String>,
+}
+
+#[derive(Clone, Serialize, Deserialize, Default)]
+pub struct LatexOpts {
+    #[serde(default)]
+    pdf_options: PDFRendererOpts,
+    #[serde(default)]
+    enable: bool,
+}
+
+#[derive(Clone, Serialize, Deserialize, Default)]
+pub struct TypstOpts {
+    #[serde(default)]
+    fill: PDFRendererOpts,
+    background: Option<String>,
+    foreground: Option<String>,
+    #[serde(default)]
+    enable: bool,
+}
 
 impl FromObject for Opts {
     fn from_object(obj: Object) -> Result<Self, conversion::Error> {
